@@ -1,0 +1,19 @@
+name: hi
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3  
+      - run: echo "Today is: $(date +%F)" > foo.txt
+      - uses: scapeville/action-git-add-all-then-commit-then-push@v1
+        with:
+          name: cool
+          email: 136252035+nicho314@users.noreply.github.com
