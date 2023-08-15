@@ -1,0 +1,29 @@
+name: okay
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3  
+      - run: |
+          git config user.name cool-cat
+          git config user.email "136252035+nicho314@users.noreply.github.com"
+
+          random_integer=$((1 + RANDOM % 10))  # [1, 10]
+
+          for ((i=1; i<=$random_integer; i++)); do
+            echo "::group::Iteration $i"
+            echo "Today is $(date +"%F %T.%3N")" > foo.txt
+            git commit -am "Iteration $i"
+            sleep 0.25
+            echo "::endgroup::"
+          done
+
+          git push
