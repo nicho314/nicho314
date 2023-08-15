@@ -12,7 +12,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3  
-      - run: echo "Today is: $(date +%F)" > foo.txt
+      - run: echo "hi"
+      - run: echo "Today is $(date +%F)" > foo.txt
       - uses: scapeville/action-git-add-all-then-commit-then-push@v1
         with:
           name: cool
